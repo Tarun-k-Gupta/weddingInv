@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Abhilasha & Kashish — Wedding Invitation</title>
+  <meta name="description" content="You are cordially invited to celebrate the wedding of Abhilasha & Kashish. Join us for the Haldi, Ring Ceremony, and Wedding on July 3-4, 2026.">
+  <meta name="theme-color" content="#C9A84C">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Bokeh Background -->
+  <canvas id="bokeh-canvas" aria-hidden="true"></canvas>
+
+  <!-- Music Toggle -->
+  <button class="music-toggle" id="music-toggle" aria-label="Toggle music">
+    <div class="music-icon">
+      <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+    </div>
+  </button>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <img src="images/hero-couple.png" alt="Abhilasha and Kashish" loading="eager">
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-invite" data-animate="words" data-anim-delay="400">With love and joy, we invite you to celebrate</p>
+      <h1 class="hero-names">
+        <span class="hero-name-line" data-animate="chars" data-anim-delay="1000">Abhilasha</span>
+        <span class="hero-name-amp" data-animate="chars" data-anim-delay="1600">&</span>
+        <span class="hero-name-line" data-animate="chars" data-anim-delay="1900">Kashish</span>
+      </h1>
+      <p class="hero-tagline" data-animate="words" data-anim-delay="2800">Two souls, one beautiful journey</p>
+      <div class="hero-date" data-animate="words" data-anim-delay="3400">4th July 2026 · Saturday</div>
+    </div>
+    <div class="hero-scroll">
+      <span>Scroll</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- ===== EVENTS ===== -->
+  <section class="events-section section-padding" id="events">
+    <h2 class="section-title" data-animate="words">Our Celebrations</h2>
+    <hr class="gold-divider reveal">
+    <p class="section-subtitle reveal">Tap each card to reveal the details</p>
+
+    <div class="events-grid">
+      <!-- Haldi -->
+      <div class="flip-card card-haldi reveal reveal-delay-1" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="event-icon">🌼</div>
+            <h3>Haldi</h3>
+            <span class="tap-hint">Tap to reveal</span>
+          </div>
+          <div class="flip-card-back">
+            <h3>Haldi Ceremony</h3>
+            <div class="event-detail" data-animate="lines">
+              <strong>3rd July 2026</strong><br>
+              11 AM Onwards<br>
+              Country Inn & Suites<br>
+              by Radisson, Zirakpur
+            </div>
+            <a href="https://maps.google.com/?q=Country+Inn+%26+Suites+by+Radisson+Zirakpur" target="_blank" rel="noopener" class="btn-location" onclick="event.stopPropagation()">
+              📍 View Location
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ring Ceremony -->
+      <div class="flip-card card-ring reveal reveal-delay-2" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="event-icon">💍</div>
+            <h3>Ring Ceremony</h3>
+            <span class="tap-hint">Tap to reveal</span>
+          </div>
+          <div class="flip-card-back">
+            <h3>Ring Ceremony</h3>
+            <div class="event-detail">
+              <strong>3rd July 2026</strong><br>
+              7 PM Onwards<br>
+              Redwood Resorts<br>
+              Morni Hills
+            </div>
+            <a href="https://maps.google.com/?q=Redwood+Resorts+Morni+Hills" target="_blank" rel="noopener" class="btn-location" onclick="event.stopPropagation()">
+              📍 View Location
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Wedding -->
+      <div class="flip-card card-wedding reveal reveal-delay-3" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="event-icon">🕌</div>
+            <h3>Wedding</h3>
+            <span class="tap-hint">Tap to reveal</span>
+          </div>
+          <div class="flip-card-back">
+            <h3>Wedding Ceremony</h3>
+            <div class="event-detail">
+              <strong>4th July 2026 · Saturday</strong><br>
+              7 PM Onwards<br>
+              Amour – The Grand Ballroom<br>
+              Panchkula
+            </div>
+            <a href="https://maps.google.com/?q=Amour+The+Grand+Ballroom+Panchkula" target="_blank" rel="noopener" class="btn-location" onclick="event.stopPropagation()">
+              📍 View Location
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== COUNTDOWN ===== -->
+  <section class="countdown-section section-padding" id="countdown">
+    <h2 class="section-title" data-animate="words">Counting Down</h2>
+    <hr class="gold-divider reveal">
+    <p class="section-subtitle reveal">Until we say "I do"</p>
+    <div class="countdown-grid reveal">
+      <div class="countdown-item">
+        <div class="flip-clock" id="cd-days" data-value="00">
+          <div class="flip-clock-top"><span>00</span></div>
+          <div class="flip-clock-bottom"><span>00</span></div>
+          <div class="flip-clock-flap flip-clock-flap-top"><span>00</span></div>
+          <div class="flip-clock-flap flip-clock-flap-bottom"><span>00</span></div>
+        </div>
+        <div class="countdown-label">Days</div>
+      </div>
+      <div class="countdown-item">
+        <div class="flip-clock" id="cd-hours" data-value="00">
+          <div class="flip-clock-top"><span>00</span></div>
+          <div class="flip-clock-bottom"><span>00</span></div>
+          <div class="flip-clock-flap flip-clock-flap-top"><span>00</span></div>
+          <div class="flip-clock-flap flip-clock-flap-bottom"><span>00</span></div>
+        </div>
+        <div class="countdown-label">Hours</div>
+      </div>
+      <div class="countdown-item">
+        <div class="flip-clock" id="cd-minutes" data-value="00">
+          <div class="flip-clock-top"><span>00</span></div>
+          <div class="flip-clock-bottom"><span>00</span></div>
+          <div class="flip-clock-flap flip-clock-flap-top"><span>00</span></div>
+          <div class="flip-clock-flap flip-clock-flap-bottom"><span>00</span></div>
+        </div>
+        <div class="countdown-label">Minutes</div>
+      </div>
+      <div class="countdown-item">
+        <div class="flip-clock" id="cd-seconds" data-value="00">
+          <div class="flip-clock-top"><span>00</span></div>
+          <div class="flip-clock-bottom"><span>00</span></div>
+          <div class="flip-clock-flap flip-clock-flap-top"><span>00</span></div>
+          <div class="flip-clock-flap flip-clock-flap-bottom"><span>00</span></div>
+        </div>
+        <div class="countdown-label">Seconds</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GALLERY ===== -->
+  <section class="gallery-section section-padding" id="gallery">
+    <h2 class="section-title" data-animate="words">Our Moments</h2>
+    <hr class="gold-divider reveal">
+    <p class="section-subtitle reveal">Swipe to explore</p>
+    <div class="gallery-carousel reveal" id="gallery-carousel">
+      <div class="gallery-item"><img src="images/hero-couple.png" alt="Abhilasha and Kashish together" loading="lazy"></div>
+      <div class="gallery-item"><img src="images/gallery-haldi.png" alt="Haldi ceremony moments" loading="lazy"></div>
+      <div class="gallery-item"><img src="images/gallery-ring.png" alt="Ring ceremony moments" loading="lazy"></div>
+      <div class="gallery-item"><img src="images/gallery-wedding.png" alt="Wedding ceremony" loading="lazy"></div>
+      <div class="gallery-item"><img src="images/gallery-prewedding.png" alt="Pre-wedding photoshoot" loading="lazy"></div>
+    </div>
+    <div class="gallery-dots" id="gallery-dots"></div>
+  </section>
+
+  <!-- ===== RSVP ===== -->
+  <section class="rsvp-section section-padding" id="rsvp">
+    <h2 class="section-title" data-animate="chars">RSVP</h2>
+    <hr class="gold-divider reveal">
+    <p class="section-subtitle reveal">We'd love to know you're coming</p>
+
+    <div class="rsvp-form reveal" id="rsvp-form">
+      <form id="rsvp-form-el" onsubmit="return handleRSVP(event)">
+        <div class="form-group">
+          <label for="rsvp-name">Your Name</label>
+          <input type="text" id="rsvp-name" placeholder="Enter your full name" required>
+        </div>
+        <div class="form-group">
+          <label for="rsvp-guests">Number of Guests</label>
+          <select id="rsvp-guests" required>
+            <option value="" disabled selected>Select</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5+">5+</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Will you attend?</label>
+          <div class="attending-options">
+            <div class="attending-option" id="attend-yes" onclick="selectAttending('yes')">Yes, gladly!</div>
+            <div class="attending-option" id="attend-no" onclick="selectAttending('no')">Sorry, can't</div>
+          </div>
+          <input type="hidden" id="rsvp-attending" required>
+        </div>
+        <button type="submit" class="btn-submit" id="btn-submit">Send RSVP</button>
+      </form>
+      <div class="form-success" id="form-success">
+        <div class="check-icon">✓</div>
+        <h3>Thank You!</h3>
+        <p>We can't wait to celebrate with you</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FINAL ===== -->
+  <section class="final-section" id="final">
+    <canvas id="sparkle-canvas" aria-hidden="true"></canvas>
+    <div class="final-content">
+      <p class="final-message" data-animate="lines">
+        We look forward to celebrating<br>this beautiful day with you
+      </p>
+      <h2 class="final-names" data-animate="chars">Abhilasha & Kashish</h2>
+      <div class="save-the-date" data-animate="words">Save the Date</div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    Made with <span>♥</span> for Abhilasha & Kashish
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
