@@ -442,14 +442,14 @@ async function handleRSVP(e) {
     // >>>>>> PASTE YOUR DEPLOYED GOOGLE APPS SCRIPT WEB APP URL HERE <<<<<<
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw27NPeYoXFFEurpr3Z7baA6pLPLVmKzggd_WhhabDmW44W9PSMLDh4U1Q9LX_k3B-WGw/exec';
 
-    if (SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbw27NPeYoXFFEurpr3Z7baA6pLPLVmKzggd_WhhabDmW44W9PSMLDh4U1Q9LX_k3B-WGw/exec') {
-      // Fallback preview mode
-      console.warn('Apps Script URL not configured — simulating success.');
-      await new Promise(r => setTimeout(r, 1500));
-      document.getElementById('rsvp-form-el').style.display = 'none';
-      document.getElementById('form-success').style.display = 'block';
-      return false;
-    }
+    // if (SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+    //   // Fallback preview mode
+    //   console.warn('Apps Script URL not configured — simulating success.');
+    //   await new Promise(r => setTimeout(r, 1500));
+    //   document.getElementById('rsvp-form-el').style.display = 'none';
+    //   document.getElementById('form-success').style.display = 'block';
+    //   return false;
+    // }
 
     const res = await fetch(SCRIPT_URL, {
       method: 'POST',
