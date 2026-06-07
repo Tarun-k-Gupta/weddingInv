@@ -326,86 +326,11 @@ function initGallery() {
 }
 
 /* ===== RSVP ===== */
-// Store selected files in an array so we can manage removals
-let selectedFiles = [];
 
 function selectAttending(value) {
   document.getElementById('rsvp-attending').value = value;
   document.getElementById('attend-yes').classList.toggle('selected', value === 'yes');
   document.getElementById('attend-no').classList.toggle('selected', value === 'no');
-
-  const uploadGroup = document.getElementById('aadhar-upload-group');
-  if (value === 'yes') {
-    uploadGroup.style.display = 'block';
-    updateAadharHint();
-  } else {
-    uploadGroup.style.display = 'none';
-    selectedFiles = [];
-    renderFileList();
-    document.getElementById('rsvp-aadhar').value = '';
-  }
-}
-
-function updateAadharHint() {
-  const guestsRaw = document.getElementById('rsvp-guests').value;
-  const hint = document.getElementById('aadhar-hint');
-  if (guestsRaw) {
-    hint.textContent = `(max ${guestsRaw} file${guestsRaw === '1' ? '' : 's'})`;
-  } else {
-    hint.textContent = '(1 per guest)';
-  }
-}
-
-// Update hint when guest count changes
-document.getElementById('rsvp-guests').addEventListener('change', function() {
-  if (document.getElementById('rsvp-attending').value === 'yes') {
-    updateAadharHint();
-  }
-});
-
-// File input change handler
-document.getElementById('rsvp-aadhar').addEventListener('change', function() {
-  const guestsRaw = document.getElementById('rsvp-guests').value;
-  const maxFiles = guestsRaw === '5+' ? 5 : parseInt(guestsRaw || '5', 10);
-
-  for (let i = 0; i < this.files.length; i++) {
-    if (selectedFiles.length >= maxFiles) {
-      alert(`Maximum ${maxFiles} Aadhar card(s) allowed for ${guestsRaw} guest(s).`);
-      break;
-    }
-    selectedFiles.push(this.files[i]);
-  }
-  this.value = ''; // reset native input
-  renderFileList();
-});
-
-function renderFileList() {
-  const list = document.getElementById('file-list');
-  list.innerHTML = '';
-  selectedFiles.forEach((file, idx) => {
-    const chip = document.createElement('div');
-    chip.className = 'file-chip';
-    chip.innerHTML = `
-      <span class="file-chip-name">${file.name}</span>
-      <button type="button" class="file-chip-remove" onclick="removeFile(${idx})" title="Remove">✕</button>
-    `;
-    list.appendChild(chip);
-  });
-}
-
-function removeFile(idx) {
-  selectedFiles.splice(idx, 1);
-  renderFileList();
-}
-
-// Convert file to base64
-function toBase64(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result.split(',')[1]);
-    reader.onerror = reject;
-  });
 }
 
 async function handleRSVP(e) {
@@ -419,25 +344,13 @@ async function handleRSVP(e) {
     return false;
   }
 
-  const maxFiles = guestsRaw === '5+' ? 5 : parseInt(guestsRaw, 10);
-  if (attending === 'yes' && selectedFiles.length > maxFiles) {
-    alert(`You can upload a maximum of ${maxFiles} Aadhar card(s).`);
-    return false;
-  }
-
   const btn = document.getElementById('btn-submit');
   btn.textContent = 'Sending...';
   btn.classList.add('loading');
 
   try {
-    // Convert files to base64
-    let filesData = [];
-    for (const file of selectedFiles) {
-      const b64 = await toBase64(file);
-      filesData.push({ name: file.name, mimeType: file.type, data: b64 });
-    }
 
-    const payload = { name, guests: guestsRaw, attending, files: filesData };
+    const payload = { name, guests: guestsRaw, attending };
 
     // >>>>>> PASTE YOUR DEPLOYED GOOGLE APPS SCRIPT WEB APP URL HERE <<<<<<
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw27NPeYoXFFEurpr3Z7baA6pLPLVmKzggd_WhhabDmW44W9PSMLDh4U1Q9LX_k3B-WGw/exec';
